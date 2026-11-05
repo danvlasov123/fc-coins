@@ -1,0 +1,40 @@
+---
+import Icon from "./Icon.astro";
+import { usd } from "../data/catalog.js";
+
+const { item } = Astro.props;
+---
+
+<article
+  class:list={["coin-card", { "coin-card--featured": item.featured }]}
+  data-platform={item.platform}
+>
+  <div class="coin-card__top">
+    <span class="coin-card__platform">{item.platformLabel}</span>
+    {item.badge && (
+      <span class:list={["badge", item.featured ? null : "badge--ghost"]}>{item.badge}</span>
+    )}
+  </div>
+
+  <div class="coin-card__amount">{item.amountLabel}</div>
+  <div class="coin-card__unit">Coins</div>
+
+  <div class="coin-card__price">
+    {usd(item.price)}
+    <s>{usd(item.compareAt)}</s>
+  </div>
+  <div class="coin-card__per">{usd(item.per100k)} per 100K</div>
+
+  <div class="coin-card__eta">
+    <Icon name="clock" size={13} />
+    {item.eta} delivery
+  </div>
+
+  <a
+    class:list={["btn", item.featured ? "btn--primary" : "btn--ghost", "btn--block"]}
+    href={item.href}
+  >
+    Buy now
+    <Icon name="arrow" size={15} />
+  </a>
+</article>

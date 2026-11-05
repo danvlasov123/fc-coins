@@ -1,0 +1,195 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { CATALOG, PLATFORMS, usd } from "../data/catalog.js";
+
+const rows = [...CATALOG].sort(
+  (a, b) => PLATFORMS.findIndex((p) => p.id === a.platform) - PLATFORMS.findIndex((p) => p.id === b.platform) || a.amount - b.amount
+);
+---
+
+<Base
+  title="FC 27 Coin Prices — Cost per 100K, Updated Daily | NINETY"
+  description="Full FC 27 coin price list: every pack across PS5, Xbox, PC and PS4 with the effective cost per 100K. Compare and pick the best rate."
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>Pricing</span>
+      </nav>
+      <h1>FC 27 coin prices</h1>
+      <p class="lede">
+        Every pack, every platform, one table. The rate per 100K is the number that
+        matters — the pack price just tells you the total.
+      </p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--2" style="gap:22px; align-items:stretch">
+        <div class="calc">
+          <div class="calc__label">Platform</div>
+          <div class="tabs" style="margin:10px 0 24px" id="calcTabs">
+            {PLATFORMS.map((platform, index) => (
+              <button
+                class="tab"
+                type="button"
+                data-platform={platform.id}
+                aria-selected={index === 0 ? "true" : "false"}
+              >
+                {platform.label}
+              </button>
+            ))}
+          </div>
+
+          <div class="calc__label">Pack size</div>
+          <input
+            type="range"
+            id="calcRange"
+            min="0"
+            max="4"
+            step="1"
+            value="2"
+            aria-label="Pack size"
+            style="margin:14px 0 26px"
+          />
+
+          <div class="calc__row" style="margin-bottom:26px">
+            <div>
+              <div class="calc__label">You get</div>
+              <div class="calc__value" id="calcAmount">1M</div>
+            </div>
+            <div style="text-align:right">
+              <div class="calc__label">You pay</div>
+              <div class="calc__value accent" id="calcPrice">$65.71</div>
+            </div>
+          </div>
+
+          <a class="btn btn--primary btn--block" id="calcCta" href="#">Buy now</a>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:18px">
+          <div class="feature" style="flex:1">
+            <div class="feature__icon"><Icon name="bolt" size={20} /></div>
+            <h3>Bigger pack, better rate</h3>
+            <p>
+              The 100K pack sets the baseline. Moving to 5M cuts roughly 13% off the cost
+              per 100K — worth it if you buy more than once a month.
+            </p>
+          </div>
+          <div class="feature" style="flex:1">
+            <div class="feature__icon"><Icon name="shield" size={20} /></div>
+            <h3>No hidden fees</h3>
+            <p>
+              The pack price is what the partner charges. No service fee on top, no
+              currency conversion, no surprise delivery charge.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Full list</span>
+          <h2 style="margin-top:14px">All packs</h2>
+        </div>
+        <p class="lede">Updated daily against the partner's live catalogue.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="price-table">
+          <thead>
+            <tr>
+              <th>Pack</th>
+              <th>Platform</th>
+              <th>Price</th>
+              <th>Per 100K</th>
+              <th>Delivery</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((item) => (
+              <tr>
+                <td><span class="num">{item.amountLabel}</span> coins</td>
+                <td>{item.platformLabel}</td>
+                <td><span class="num">{usd(item.price)}</span></td>
+                <td class="lime">{usd(item.per100k)}</td>
+                <td>{item.eta}</td>
+                <td style="text-align:right">
+                  <a class="btn btn--ghost btn--sm" href={item.href}>Buy</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>Not sure which pack?</h2>
+        <p>Start with 1M — it's the sweet spot between rate and commitment.</p>
+      </div>
+      <a class="btn btn--dark" href="/go/ps5/1m/">
+        Buy 1M on PS5
+        <Icon name="arrow" size={15} />
+      </a>
+    </div>
+  </section>
+</Base>
+
+<script define:vars={{ catalog: CATALOG }}>
+  const tiers = ["100k", "500k", "1m", "2m", "5m"];
+  const state = { platform: "ps5", index: 2 };
+
+  const range = document.getElementById("calcRange");
+  const amountEl = document.getElementById("calcAmount");
+  const priceEl = document.getElementById("calcPrice");
+  const ctaEl = document.getElementById("calcCta");
+  const tabs = document.getElementById("calcTabs");
+
+  function format(value) {
+    return "$" + value.toFixed(2);
+  }
+
+  function render() {
+    const tier = tiers[state.index];
+    const item = catalog.find((entry) => entry.platform === state.platform && entry.id.endsWith(tier));
+    if (!item) return;
+
+    amountEl.textContent = item.amountLabel;
+    priceEl.textContent = format(item.price);
+    ctaEl.textContent = `Buy ${item.amountLabel} on ${item.platformLabel}`;
+    ctaEl.setAttribute("href", item.href);
+
+    const pct = (state.index / (tiers.length - 1)) * 100;
+    range.style.setProperty("--fill", pct + "%");
+  }
+
+  range?.addEventListener("input", (event) => {
+    state.index = Number(event.target.value);
+    render();
+  });
+
+  tabs?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-platform]");
+    if (!button) return;
+    state.platform = button.getAttribute("data-platform");
+    tabs.querySelectorAll("[data-platform]").forEach((tab) => {
+      tab.setAttribute("aria-selected", String(tab === button));
+    });
+    render();
+  });
+
+  render();
+</script>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ninetycoins.com/sitemap-index.xml

@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<Base
+  title="About NINETY — A Catalogue, Not a Store"
+  description="NINETY lists EA SPORTS FC coin packs from one verified partner. No accounts, no passwords, no payments on our side."
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>About</span>
+      </nav>
+      <h1>A catalogue, not a store</h1>
+      <p class="lede">
+        We do one thing: keep a clean, honest list of FC coin packs and send you to a
+        partner that can actually deliver them.
+      </p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--2" style="gap:40px">
+        <div>
+          <h2 style="font-size:2rem">Why it exists</h2>
+          <p class="lede" style="margin-top:16px">
+            Searching for FC coins means wading through twenty storefronts with the same
+            stock photo and no real prices. We built the page we wanted: every pack, the
+            rate per 100K, a delivery window, and a single button.
+          </p>
+          <p class="lede" style="margin-top:14px">
+            We do not hold coins, take payments or ask for credentials. The partner does
+            the fulfilment; we do the comparison and the accountability.
+          </p>
+        </div>
+
+        <div class="grid" style="gap:14px">
+          <div class="feature">
+            <div class="feature__icon"><Icon name="shield" size={20} /></div>
+            <h3>One partner, audited</h3>
+            <p>We track delivery times and refunds. Miss the window twice and the store leaves the catalogue.</p>
+          </div>
+          <div class="feature">
+            <div class="feature__icon"><Icon name="card" size={20} /></div>
+            <h3>No payment data</h3>
+            <p>Checkout happens on the partner's domain. Your card never touches this site.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="faq">
+        <details open>
+          <summary>Do you sell the coins yourself?</summary>
+          <p>No. NINETY is a catalogue. The order, payment and delivery happen at the partner store.</p>
+        </details>
+        <details>
+          <summary>How do you make money?</summary>
+          <p>The partner pays a referral commission on completed orders. It does not change the price you see.</p>
+        </details>
+        <details>
+          <summary>Are you affiliated with EA?</summary>
+          <p>No. EA SPORTS FC is a trademark of Electronic Arts. We are not affiliated with, endorsed by or sponsored by EA.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</Base>

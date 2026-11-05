@@ -1,0 +1,150 @@
+---
+import Base from "../../layouts/Base.astro";
+import CoinCard from "../../components/CoinCard.astro";
+import Icon from "../../components/Icon.astro";
+import { PLATFORMS, byPlatform, usd } from "../../data/catalog.js";
+
+export function getStaticPaths() {
+  return PLATFORMS.map((platform) => ({
+    params: { platform: platform.id },
+    props: { platform },
+  }));
+}
+
+const { platform } = Astro.props;
+const items = byPlatform(platform.id);
+const cheapest = Math.min(...items.map((item) => item.per100k));
+const top = items.reduce((best, item) => (item.amount > best.amount ? item : best), items[0]);
+
+const faqs = [
+  {
+    q: `How do FC 27 coins reach my ${platform.label} club?`,
+    a: "The partner lists a low-value player at an inflated price and buys them with your coins, or runs a squad-fitness transfer. You stay logged in on your own console or companion app the whole time.",
+  },
+  {
+    q: `How long does ${platform.label} delivery take?`,
+    a: `${platform.eta} on a normal day. Peak hours after a promo release can stretch it, and the partner refunds anything that misses the window.`,
+  },
+  {
+    q: "Can I use the same pack on another platform?",
+    a: "No. Coins are platform-bound — a pack bought here only lands in a matching club. Pick the platform you actually play on.",
+  },
+];
+---
+
+<Base
+  title={`Buy FC 27 Coins ${platform.label} — Instant Delivery | NINETY`}
+  description={`FC 27 coins for ${platform.full} from ${usd(cheapest)} per 100K. Compare packs, check delivery times, buy from a verified partner.`}
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <a href="/fc-27-coins">FC 27 coins</a>
+        <span>/</span>
+        <span>{platform.label}</span>
+      </nav>
+      <h1>FC 27 coins for {platform.label}</h1>
+      <p class="lede">
+        {platform.blurb} Five pack sizes, from 100K to 5M, priced per 100K so you can see
+        exactly where the discount kicks in.
+      </p>
+
+      <div class="hero__meta" style="max-width:640px">
+        <span>From <strong>{usd(cheapest)}</strong> / 100K</span>
+        <span><strong>{platform.eta}</strong> typical</span>
+        <span><strong>{items.length}</strong> packs</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--five">
+        {items.map((item) => <CoinCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--2" style="align-items:start; gap:34px">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>{platform.full}</span>
+          <h2 style="margin-top:14px">How {platform.label} delivery works</h2>
+          <p class="lede" style="margin-top:16px">
+            No password, no console login, no remote access. The transfer happens through
+            the in-game market while you keep full control of your club.
+          </p>
+        </div>
+
+        <div class="faq" style="border-top:0">
+          <details open>
+            <summary>1. Pick a pack</summary>
+            <p>
+              Choose 100K up to 5M. Bigger packs lower the effective rate — the 5M pack
+              runs about 13% cheaper per 100K than four separate 1M orders.
+            </p>
+          </details>
+          <details open>
+            <summary>2. Pay at the partner</summary>
+            <p>
+              Checkout opens on the partner's store, where you pay by card, PayPal or
+              crypto. NINETY never sees your payment details.
+            </p>
+          </details>
+          <details open>
+            <summary>3. Stay logged in</summary>
+            <p>
+              Keep your {platform.full} club open. Delivery takes {platform.eta}. The
+              partner confirms in chat when the transfer is done.
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>FAQ</span>
+          <h2 style="margin-top:14px">{platform.label} specifics</h2>
+        </div>
+      </div>
+      <div class="faq">
+        {faqs.map((faq, index) => (
+          <details open={index === 0}>
+            <summary>{faq.q}</summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+
+      <div style="margin-top:28px">
+        <a class="btn btn--ghost btn--sm" href="/fc-27-coins">
+          All platforms
+          <Icon name="arrow" size={14} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>Biggest pack, best rate.</h2>
+        <p>
+          The {top.amountLabel} bundle on {platform.label} lands at {usd(top.per100k)} per
+          100K — the cheapest way to stock up before a promo.
+        </p>
+      </div>
+      <a class="btn btn--dark" href={top.href}>
+        Buy {top.amountLabel}
+        <Icon name="arrow" size={15} />
+      </a>
+    </div>
+  </section>
+</Base>

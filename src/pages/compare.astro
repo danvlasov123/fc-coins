@@ -1,0 +1,123 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+
+const rows = [
+  { label: "Curated stock, one catalogue", us: "yes", market: "partial", classifieds: "no" },
+  { label: "Price per 100K shown upfront", us: "yes", market: "partial", classifieds: "no" },
+  { label: "Published delivery window", us: "yes", market: "partial", classifieds: "no" },
+  { label: "Card, PayPal and crypto", us: "yes", market: "yes", classifieds: "partial" },
+  { label: "Human support after the sale", us: "yes", market: "partial", classifieds: "no" },
+  { label: "Refund on failed delivery", us: "yes", market: "partial", classifieds: "no" },
+  { label: "Seller identity you can check", us: "yes", market: "yes", classifieds: "no" },
+];
+
+const glyph = (value) => (value === "yes" ? "✓" : value === "partial" ? "~" : "✕");
+const cls = (value) => (value === "yes" ? "tick" : value === "partial" ? "lime" : "cross");
+---
+
+<Base
+  title="Best Sites to Buy FC Coins in 2026 — Honest Comparison | NINETY"
+  description="What actually separates a good FC coin store from a bad one: price transparency, delivery window, support and refunds. A practical comparison checklist."
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>Compare</span>
+      </nav>
+      <h1>Where to buy FC coins</h1>
+      <p class="lede">
+        Most “best site” lists rank whoever pays the most. This one ranks the things that
+        decide whether your coins arrive: price transparency, a published delivery window,
+        real support, and a refund path.
+      </p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="table-wrap">
+        <table class="price-table compare-table">
+          <thead>
+            <tr>
+              <th>Criterion</th>
+              <th>Our partner</th>
+              <th>Big marketplace</th>
+              <th>Classifieds</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr>
+                <td>{row.label}</td>
+                <td class={cls(row.us)}>{glyph(row.us)}</td>
+                <td class={cls(row.market)}>{glyph(row.market)}</td>
+                <td class={cls(row.classifieds)}>{glyph(row.classifieds)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="lede" style="margin-top:16px; font-size:0.78rem">
+        Illustrative prototype data. Competitor columns are editorial placeholders, not
+        verified claims — check current terms before buying anywhere.
+      </p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--3">
+        <div class="feature">
+          <div class="feature__icon"><Icon name="card" size={20} /></div>
+          <h3>Price per 100K, not per pack</h3>
+          <p>
+            A $30 pack can be worse value than a $65 one. Always divide by the coin
+            amount before you compare two stores.
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><Icon name="clock" size={20} /></div>
+          <h3>A window, not a promise</h3>
+          <p>
+            “Instant” means nothing without a number. A store that publishes 10–15 minutes
+            and refunds late orders is worth more than one that says “fast”.
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><Icon name="headset" size={20} /></div>
+          <h3>Support after the money</h3>
+          <p>
+            The real test is what happens when a transfer stalls at 2am. Check the refund
+            policy before you check the price.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Verdict</span>
+          <h2 style="margin-top:14px">Why we point at one store</h2>
+        </div>
+      </div>
+      <p class="lede" style="max-width:76ch">
+        NINETY is a catalogue, not a store. We list packs from a single verified partner
+        because comparing five anonymous sellers you cannot audit is worse than comparing
+        one you can. If that partner starts missing delivery windows, the catalogue
+        changes — that is the only leverage a catalogue has.
+      </p>
+      <div style="margin-top:28px">
+        <a class="btn btn--primary" href="/fc-27-coins">
+          See the packs
+          <Icon name="arrow" size={15} />
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

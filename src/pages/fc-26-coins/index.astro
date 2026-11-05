@@ -1,0 +1,110 @@
+---
+import Base from "../../layouts/Base.astro";
+import Icon from "../../components/Icon.astro";
+
+const faqs = [
+  {
+    q: "Are FC 26 coins still available?",
+    a: "Yes, but stock is thinner than for FC 27. The partner lists what is actually in stock, and prices move weekly rather than daily.",
+  },
+  {
+    q: "Can I move FC 26 coins to FC 27?",
+    a: "No. Each edition has its own economy. Coins bought for FC 26 stay in FC 26.",
+  },
+  {
+    q: "Is it cheaper than FC 27?",
+    a: "Usually yes per 100K, because demand has moved on. The trade-off is a longer delivery window and fewer pack sizes.",
+  },
+];
+---
+
+<Base
+  title="FC 26 Coins — Legacy Packs and Prices | NINETY"
+  description="FC 26 coins are still tradeable but stock is thinner. What is available, how delivery works, and why FC 27 packs are the better buy now."
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>FC 26 coins</span>
+      </nav>
+      <h1>FC 26 coins</h1>
+      <p class="lede">
+        The previous season. Still tradeable, still deliverable — but stock is thinner and
+        prices move weekly instead of daily.
+      </p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="feature" style="border-color: rgba(198,255,61,.32)">
+        <div class="feature__icon"><Icon name="bolt" size={20} /></div>
+        <h3>Playing FC 27? Start there.</h3>
+        <p style="margin-bottom:18px">
+          FC 27 has four platforms, five pack sizes and daily pricing. FC 26 stock is
+          limited to whatever the partner holds at the moment.
+        </p>
+        <a class="btn btn--primary btn--sm" href="/fc-27-coins">
+          See FC 27 packs
+          <Icon name="arrow" size={14} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--3">
+        <div class="feature">
+          <div class="feature__icon"><Icon name="clock" size={20} /></div>
+          <h3>Slower delivery</h3>
+          <p>Expect 20–40 minutes instead of 10–15. Legacy stock is often held by fewer sellers.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><Icon name="shield" size={20} /></div>
+          <h3>Same buyer protection</h3>
+          <p>The partner's refund policy applies to every edition. Late delivery is refunded, same as FC 27.</p>
+        </div>
+        <div class="feature">
+          <div class="feature__icon"><Icon name="card" size={20} /></div>
+          <h3>Prices on request</h3>
+          <p>FC 26 pricing is quoted at checkout because it moves weekly. Ask support for the current rate per 100K.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>FAQ</span>
+          <h2 style="margin-top:14px">FC 26 questions</h2>
+        </div>
+      </div>
+      <div class="faq">
+        {faqs.map((faq, index) => (
+          <details open={index === 0}>
+            <summary>{faq.q}</summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>Most players moved on.</h2>
+        <p>FC 27 has the stock, the pack sizes and the daily prices. FC 26 stays here for as long as the partner holds inventory.</p>
+      </div>
+      <a class="btn btn--dark" href="/fc-27-coins">
+        Go to FC 27
+        <Icon name="arrow" size={15} />
+      </a>
+    </div>
+  </section>
+</Base>

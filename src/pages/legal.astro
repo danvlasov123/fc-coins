@@ -1,0 +1,65 @@
+---
+import Base from "../layouts/Base.astro";
+
+const updated = "5 November 2026";
+---
+
+<Base
+  title="Legal — Terms, Privacy, Disclaimer | NINETY"
+  description="Terms of use, privacy policy and disclaimer for NINETY, an independent catalogue of EA SPORTS FC coin packs."
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>Legal</span>
+      </nav>
+      <h1>Legal</h1>
+      <p class="lede">Last updated {updated}. Plain language, no surprises.</p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container" style="max-width:820px">
+      <div id="terms">
+        <h2 style="font-size:2rem">Terms of use</h2>
+        <p class="lede" style="margin-top:14px">
+          NINETY is an independent catalogue. We publish information about coin packs and
+          link to a third-party store that fulfils orders. We are not a party to the sale
+          between you and that store, and we do not process payments.
+        </p>
+        <p class="lede" style="margin-top:12px">
+          Prices and delivery windows are indicative and can change without notice. You are
+          responsible for complying with the terms of service of any game you play.
+        </p>
+      </div>
+
+      <div id="privacy" style="margin-top:44px">
+        <h2 style="font-size:2rem">Privacy policy</h2>
+        <p class="lede" style="margin-top:14px">
+          We collect anonymous analytics — page views and outbound clicks — to understand
+          which packs people actually want. We do not collect payment data, game
+          credentials or console identifiers.
+        </p>
+        <p class="lede" style="margin-top:12px">
+          Outbound links may carry a referral tag so the partner can attribute the visit.
+          No personal data is shared beyond that tag.
+        </p>
+      </div>
+
+      <div id="disclaimer" style="margin-top:44px">
+        <h2 style="font-size:2rem">Disclaimer</h2>
+        <p class="lede" style="margin-top:14px">
+          NINETY is not affiliated with, endorsed by or sponsored by Electronic Arts. EA
+          SPORTS FC and related marks are trademarks of their respective owners.
+        </p>
+        <p class="lede" style="margin-top:12px">
+          Buying in-game currency from third parties may violate a game's terms of service
+          and can put an account at risk. We publish risk information openly and do not
+          promise that any account is immune from enforcement.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

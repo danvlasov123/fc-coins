@@ -1,0 +1,374 @@
+---
+import Base from "../layouts/Base.astro";
+import CoinCard from "../components/CoinCard.astro";
+import Icon from "../components/Icon.astro";
+import { CATALOG, PLATFORMS, HERO_ITEM, usd } from "../data/catalog.js";
+
+const tickerIds = [
+  "ps5-100k",
+  "pc-100k",
+  "xbox-500k",
+  "ps5-1m",
+  "pc-1m",
+  "xbox-1m",
+  "ps5-5m",
+  "ps4-100k",
+];
+const tickerItems = CATALOG.filter((item) => tickerIds.includes(item.id));
+
+const stats = [
+  { value: "12,400+", label: "Orders delivered" },
+  { value: "8 min", label: "Median delivery" },
+  { value: "4.9/5", label: "Buyer rating" },
+  { value: "24/7", label: "Live support" },
+];
+
+const steps = [
+  {
+    title: "Pick your pack",
+    text: "Choose a platform and a coin amount. Every price is live and shown per 100K, so you always know what you pay.",
+  },
+  {
+    title: "Checkout with our partner",
+    text: "One click hands you to a verified store. Pay by card, crypto or PayPal — whatever they support.",
+  },
+  {
+    title: "Coins hit your club",
+    text: "Delivery runs through the transfer market. Most orders land in under fifteen minutes.",
+  },
+];
+
+const features = [
+  {
+    icon: "bolt",
+    title: "Instant delivery",
+    text: "Median eight minutes from payment to coins in your club. No waiting for a support agent.",
+  },
+  {
+    icon: "shield",
+    title: "Verified partner",
+    text: "Every order is fulfilled by a store with a public track record, not by an anonymous seller.",
+  },
+  {
+    icon: "card",
+    title: "Pay your way",
+    text: "Cards, PayPal and major coins. Prices stay in USD, no surprise conversion at checkout.",
+  },
+  {
+    icon: "headset",
+    title: "Support that answers",
+    text: "Live chat around the clock. If a transfer stalls, the partner re-runs it or refunds.",
+  },
+];
+
+const reviews = [
+  {
+    name: "Marcus T.",
+    meta: "PS5 · 2M coins",
+    text: "Ordered at 1am, coins were in the club before I finished a match. Price per 100K was the best I found that night.",
+  },
+  {
+    name: "Denis K.",
+    meta: "PC · 5M coins",
+    text: "I buy every promo. Never had a transfer fail, and the calculator shows exactly what a pack costs before I commit.",
+  },
+  {
+    name: "Owen R.",
+    meta: "Xbox · 500K coins",
+    text: "Sceptical at first because it links out to another store. The partner delivered in nine minutes and support replied in two.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Is buying FC 27 coins safe?",
+    a: "It carries a risk of account action because EA's terms prohibit third-party coin sales. Our partner uses transfer-market delivery and never asks for your password or console login. Use a spare account if you want zero exposure.",
+  },
+  {
+    q: "How does the delivery actually work?",
+    a: "The store lists a cheap player at an inflated price and buys it with your coins, or runs a squad-fitness transfer. You stay logged into your own console or app the whole time.",
+  },
+  {
+    q: "Who takes the payment?",
+    a: "Our verified partner. NINETY is a catalogue: we compare packs and send you to the store, so your card details never touch this site.",
+  },
+  {
+    q: "What if my coins never arrive?",
+    a: "Contact the partner's support first — they hold the order. If it stalls, message us and we escalate; repeat failures get the store pulled from the catalogue.",
+  },
+  {
+    q: "Why are prices different per platform?",
+    a: "Stock and demand differ between PSN, Xbox and PC. PC is usually the cheapest per 100K, PS4 the most expensive because supply is thin.",
+  },
+];
+---
+
+<Base
+  title="EA SPORTS FC Coins — Compare Prices & Buy Instantly | NINETY"
+  description="Compare FC 27 coin packs across PS5, Xbox and PC. Live prices per 100K, honest delivery times, and a verified partner handling every order."
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <span class="eyebrow"><span class="dot"></span>EA SPORTS FC 27 · All platforms</span>
+        <h1>EA SPORTS FC <em>coins</em>, delivered in minutes.</h1>
+        <p class="lede">
+          Twenty packs across PS5, Xbox and PC. Live prices per 100K, honest delivery
+          windows, and a verified store on the other end of every order.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#packs">
+            Browse packs
+            <Icon name="arrow" size={15} />
+          </a>
+          <a class="btn btn--ghost" href="#how">How it works</a>
+        </div>
+
+        <div class="hero__meta">
+          <span><strong>4.9/5</strong> buyer rating</span>
+          <span><strong>12,400+</strong> orders</span>
+          <span><strong>8 min</strong> median delivery</span>
+        </div>
+      </div>
+
+      <div class="hero__art">
+        <svg class="pitch-art" viewBox="0 0 600 600" fill="none" aria-hidden="true">
+          <rect x="70" y="40" width="460" height="520" rx="10" stroke="rgba(198,255,61,0.16)"></rect>
+          <path d="M70 300h460" stroke="rgba(198,255,61,0.12)"></path>
+          <circle cx="300" cy="300" r="96" stroke="rgba(198,255,61,0.18)"></circle>
+          <circle cx="300" cy="300" r="4" fill="rgba(198,255,61,0.5)"></circle>
+          <rect x="180" y="40" width="240" height="80" stroke="rgba(198,255,61,0.12)"></rect>
+          <rect x="180" y="480" width="240" height="80" stroke="rgba(198,255,61,0.12)"></rect>
+          <path d="M230 120a70 70 0 0 0 140 0" stroke="rgba(198,255,61,0.1)"></path>
+          <path d="M230 480a70 70 0 0 1 140 0" stroke="rgba(198,255,61,0.1)"></path>
+        </svg>
+
+        <div class="pack--back"></div>
+
+        <article class="pack">
+          <div class="pack__top">
+            <span>EA FC <span class="pack__season">27</span></span>
+            <span>{HERO_ITEM.platformLabel}</span>
+          </div>
+
+          <div class="pack__body">
+            <div class="pack__amount">{HERO_ITEM.amountLabel}</div>
+            <div class="pack__unit">Coins</div>
+          </div>
+
+          <div class="pack__row">
+            <div class="pack__price">
+              {usd(HERO_ITEM.price)}
+              <small>{usd(HERO_ITEM.per100k)} / 100K</small>
+            </div>
+            <div class="pack__go"><Icon name="arrow" size={18} /></div>
+          </div>
+        </article>
+
+        <div class="float-chip float-chip--a">
+          <Icon name="bolt" size={14} />
+          Instant delivery
+        </div>
+        <div class="float-chip float-chip--b">
+          <Icon name="shield" size={14} />
+          Verified partner
+        </div>
+        <div class="float-chip float-chip--c">
+          <Icon name="star" size={14} />
+          4.9 · 2,180 reviews
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      {[...tickerItems, ...tickerItems].map((item) => (
+        <span class="ticker__item">
+          <b>FC 27</b>
+          <span class="sep"></span>
+          {item.platformLabel}
+          <span class="sep"></span>
+          {item.amountLabel}
+          <span class="up">{usd(item.price)}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+
+  <!-- CATALOG -->
+  <section class="section" id="packs">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Catalog</span>
+          <h2 style="margin-top:14px">Pick a pack</h2>
+        </div>
+        <p class="lede">
+          Prices update daily. Every pack links straight to the partner's checkout —
+          we never touch your payment details.
+        </p>
+      </div>
+
+      <div class="tabs" data-tabs="#catalogGrid" role="tablist" aria-label="Filter by platform">
+        <button class="tab" role="tab" aria-selected="true" data-platform="all">All</button>
+        {PLATFORMS.map((platform) => (
+          <button class="tab" role="tab" aria-selected="false" data-platform={platform.id}>
+            {platform.label}
+          </button>
+        ))}
+      </div>
+
+      <div class="grid grid--cards" id="catalogGrid">
+        {CATALOG.map((item) => <CoinCard item={item} />)}
+      </div>
+
+      <div style="margin-top:28px; display:flex; justify-content:flex-end">
+        <a class="btn btn--ghost btn--sm" href="/pricing">
+          Full price list
+          <Icon name="arrow" size={14} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="section--tight">
+    <div class="container">
+      <div class="stats">
+        {stats.map((stat) => (
+          <div class="stat">
+            <div class="stat__value">{stat.value}</div>
+            <div class="stat__label">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section class="section" id="how">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Process</span>
+          <h2 style="margin-top:14px">Three steps, no account</h2>
+        </div>
+        <p class="lede">
+          No sign-up wall, no password, no console login. You stay in control the whole
+          way.
+        </p>
+      </div>
+
+      <div class="steps">
+        {steps.map((step, index) => (
+          <div class="step">
+            <div class="step__num">{String(index + 1).padStart(2, "0")}</div>
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--cards">
+        {features.map((feature) => (
+          <div class="feature">
+            <div class="feature__icon"><Icon name={feature.icon} size={20} /></div>
+            <h3>{feature.title}</h3>
+            <p>{feature.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>Buyers</span>
+          <h2 style="margin-top:14px">What lands in the club</h2>
+        </div>
+        <p class="lede">Unedited notes from the last thirty days of orders.</p>
+      </div>
+
+      <div class="grid grid--3">
+        {reviews.map((review) => (
+          <div class="review">
+            <div class="stars">
+              {Array.from({ length: 5 }).map(() => <Icon name="star" size={14} />)}
+            </div>
+            <p>“{review.text}”</p>
+            <div class="review__author">
+              <span class="avatar">{review.name.charAt(0)}</span>
+              <span><strong style="color:var(--ink);display:block">{review.name}</strong>{review.meta}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section--tight">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>FAQ</span>
+          <h2 style="margin-top:14px">Before you buy</h2>
+        </div>
+      </div>
+
+      <div class="faq">
+        {faqs.map((faq, index) => (
+          <details open={index === 0}>
+            <summary>{faq.q}</summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>Your squad won't build itself.</h2>
+        <p>Pick a pack, pay at the partner, get the coins. Under ten minutes on a good night.</p>
+      </div>
+      <a class="btn btn--dark" href="#packs">
+        Choose a pack
+        <Icon name="arrow" size={15} />
+      </a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelectorAll("[data-tabs]").forEach((tabs) => {
+    const grid = document.querySelector(tabs.getAttribute("data-tabs"));
+    if (!grid) return;
+    const buttons = Array.from(tabs.querySelectorAll(".tab"));
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        buttons.forEach((b) => b.setAttribute("aria-selected", String(b === button)));
+        const platform = button.getAttribute("data-platform");
+        grid.querySelectorAll(".coin-card").forEach((card) => {
+          const match = platform === "all" || card.getAttribute("data-platform") === platform;
+          card.style.display = match ? "" : "none";
+        });
+      });
+    });
+  });
+</script>

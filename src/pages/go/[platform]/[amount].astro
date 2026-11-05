@@ -1,0 +1,89 @@
+---
+import Base from "../../../layouts/Base.astro";
+import Icon from "../../../components/Icon.astro";
+import { CATALOG, usd } from "../../../data/catalog.js";
+
+export function getStaticPaths() {
+  return CATALOG.map((item) => ({
+    params: {
+      platform: item.platform,
+      amount: item.amountLabel.toLowerCase(),
+    },
+    props: { item },
+  }));
+}
+
+const { item } = Astro.props;
+
+// Подключить, когда партнёр выбран: "https://partner.example/checkout"
+const PARTNER_BASE = "";
+const subid = `ninety-${item.platform}-${item.amountLabel.toLowerCase()}`;
+const target = PARTNER_BASE ? `${PARTNER_BASE}?subid=${subid}` : "";
+---
+
+<Base
+  title={`Redirecting — ${item.amountLabel} FC 27 coins on ${item.platformLabel}`}
+  description={`Handing you to our verified partner for ${item.amountLabel} FC 27 coins on ${item.platformLabel}.`}
+>
+  <section class="section" style="min-height:62vh; display:grid; place-items:center">
+    <div class="container" style="max-width:560px; text-align:center">
+      {target ? (
+        <meta http-equiv="refresh" content={`0;url=${target}`} />
+      ) : null}
+
+      <div class="feature" style="padding:40px; text-align:center">
+        <div
+          style="width:54px;height:54px;margin:0 auto 22px;border-radius:50%;border:2px solid rgba(198,255,61,.25);border-top-color:var(--lime);animation:spin 1s linear infinite"
+        >
+        </div>
+
+        <span class="eyebrow" style="justify-content:center">
+          <span class="dot"></span>
+          {target ? "Redirecting" : "Demo mode"}
+        </span>
+
+        <h1 style="font-size:2.4rem; margin:16px 0 12px">
+          {item.amountLabel} coins · {item.platformLabel}
+        </h1>
+
+        <p class="lede" style="margin:0 auto 8px">
+          {target
+            ? "Handing you to the partner checkout. Keep this tab open in case the redirect is blocked."
+            : "The partner checkout is not connected yet. In production this page would 302 to the store with a referral tag."}
+        </p>
+
+        <p style="color:var(--muted); font-size:0.82rem; margin-bottom:24px">
+          {usd(item.price)} · {usd(item.per100k)} per 100K · {item.eta} delivery
+        </p>
+
+        {target ? (
+          <a class="btn btn--primary btn--block" href={target}>Continue to partner</a>
+        ) : (
+          <div style="display:grid; gap:10px">
+            <a class="btn btn--primary btn--block" href="/fc-27-coins">
+              Back to packs
+            </a>
+            <code style="font-size:0.72rem;color:var(--muted-2);word-break:break-all">
+              /go/{item.platform}/{item.amountLabel.toLowerCase()}/ → {subid}
+            </code>
+          </div>
+        )}
+      </div>
+
+      <p style="margin-top:22px">
+        <a class="btn btn--ghost btn--sm" href="/pricing">
+          Compare other packs
+          <Icon name="arrow" size={14} />
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <style>
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</Base>

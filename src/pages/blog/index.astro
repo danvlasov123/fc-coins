@@ -1,0 +1,87 @@
+---
+import Base from "../../layouts/Base.astro";
+import Icon from "../../components/Icon.astro";
+
+const posts = [
+  {
+    tag: "Safety",
+    title: "Is buying FC 27 coins safe?",
+    text: "What EA actually enforces, which delivery methods carry the lowest risk, and how to keep your main account out of it.",
+    time: "7 min read",
+  },
+  {
+    tag: "Delivery",
+    title: "How coin transfers work",
+    text: "The transfer market method explained step by step — why a cheap player gets listed high, and what you should see on your end.",
+    time: "5 min read",
+  },
+  {
+    tag: "Value",
+    title: "Coins vs FC Points",
+    text: "A $20 note buys very different things depending on which one you convert it to. The maths, without the marketing.",
+    time: "6 min read",
+  },
+  {
+    tag: "Timing",
+    title: "When coins are cheapest",
+    text: "Prices move with promos. The three windows in a season where buying early saves the most per 100K.",
+    time: "4 min read",
+  },
+];
+---
+
+<Base
+  title="FC Coin Guides — Safety, Delivery and Value | NINETY"
+  description="Practical guides to buying EA SPORTS FC coins: ban risk, transfer methods, price timing and how coins compare to FC Points."
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>Guides</span>
+      </nav>
+      <h1>Guides</h1>
+      <p class="lede">
+        Short, practical notes for people who buy coins more than once. No hype, no
+        “100% safe” promises.
+      </p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--2">
+        {posts.map((post) => (
+          <article class="review" style="gap:12px">
+            <span class="badge badge--ghost" style="align-self:flex-start">{post.tag}</span>
+            <h3 style="font-size:1.5rem">{post.title}</h3>
+            <p>{post.text}</p>
+            <div class="review__author" style="margin-top:12px">
+              <Icon name="clock" size={13} />
+              {post.time}
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <p class="lede" style="margin-top:28px; font-size:0.8rem">
+        Full articles ship with the launch build. The catalogue and pricing pages are live
+        now.
+      </p>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>Skip the reading.</h2>
+        <p>If you already know what you want, the packs are one click away.</p>
+      </div>
+      <a class="btn btn--dark" href="/fc-27-coins">
+        Browse packs
+        <Icon name="arrow" size={15} />
+      </a>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,122 @@
+---
+import Base from "../../layouts/Base.astro";
+import CoinCard from "../../components/CoinCard.astro";
+import Icon from "../../components/Icon.astro";
+import { CATALOG, PLATFORMS, byPlatform, usd } from "../../data/catalog.js";
+
+const cheapest = (platformId) =>
+  Math.min(...byPlatform(platformId).map((item) => item.per100k));
+
+const faqs = [
+  {
+    q: "How much do FC 27 coins cost?",
+    a: "Between $6.49 and $7.29 per 100K depending on platform and pack size. PC is the cheapest, PS4 the most expensive. Larger packs drop the effective rate by up to 13%.",
+  },
+  {
+    q: "Which platform should I pick?",
+    a: "Whatever your console or PC runs. Coins are not cross-platform: a PS5 pack only lands in a PlayStation club, an Xbox pack only in an Xbox club.",
+  },
+  {
+    q: "Do I need to give my password?",
+    a: "No. Delivery happens through the transfer market while you stay logged in. Any store asking for your EA credentials should be avoided.",
+  },
+  {
+    q: "How fast is delivery?",
+    a: "PC orders usually land in 5–10 minutes, PS5 and Xbox in 10–15, PS4 in 15–20 because stock is thinner.",
+  },
+];
+---
+
+<Base
+  title="FC 27 Coins — Buy Cheap EA FC 27 Coins (PS5, Xbox, PC) | NINETY"
+  description="FC 27 coins from $6.49 per 100K. Compare packs for PS5, Xbox and PC, check delivery times, and buy from a verified partner store."
+>
+  <section class="page-hero">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span>/</span>
+        <span>FC 27 coins</span>
+      </nav>
+      <h1>FC 27 coins</h1>
+      <p class="lede">
+        Twenty packs, four platforms, one honest price per 100K. Pick the size that fits
+        your budget and the partner handles the rest.
+      </p>
+
+      <div class="hero__meta" style="max-width:640px">
+        <span>From <strong>{usd(cheapest("pc"))}</strong> / 100K</span>
+        <span><strong>10–15 min</strong> typical delivery</span>
+        <span><strong>4</strong> platforms</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="grid grid--cards">
+        {PLATFORMS.map((platform) => (
+          <a class="feature" href={`/fc-27-coins/${platform.id}`} style="display:block">
+            <div class="feature__icon"><Icon name="globe" size={20} /></div>
+            <h3>{platform.full}</h3>
+            <p style="margin-bottom:14px">{platform.blurb}</p>
+            <span class="coin-card__per">
+              From <strong style="color:var(--lime)">{usd(cheapest(platform.id))}</strong> / 100K
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="packs">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>All packs</span>
+          <h2 style="margin-top:14px">Every FC 27 pack</h2>
+        </div>
+        <p class="lede">
+          Sorted by platform. Prices are per pack, with the effective rate per 100K under
+          each one.
+        </p>
+      </div>
+
+      <div class="grid grid--cards">
+        {CATALOG.map((item) => <CoinCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <span class="eyebrow"><span class="dot"></span>FAQ</span>
+          <h2 style="margin-top:14px">FC 27 coins, answered</h2>
+        </div>
+      </div>
+      <div class="faq">
+        {faqs.map((faq, index) => (
+          <details open={index === 0}>
+            <summary>{faq.q}</summary>
+            <p>{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-band__inner">
+      <div>
+        <h2>Compare before you commit.</h2>
+        <p>See every pack side by side on one page, with the rate per 100K spelled out.</p>
+      </div>
+      <a class="btn btn--dark" href="/pricing">
+        Open price list
+        <Icon name="arrow" size={15} />
+      </a>
+    </div>
+  </section>
+</Base>
