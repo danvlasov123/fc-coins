@@ -107,6 +107,21 @@ const faqs = [
   title="EA SPORTS FC Coins — Compare Prices & Buy Instantly | NINETY"
   description="Compare FC 27 coin packs across PS5, Xbox and PC. Live prices per 100K, honest delivery times, and a verified partner handling every order."
 >
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      })}
+    ></script>
+  </Fragment>
+
   <!-- HERO -->
   <section class="hero">
     <div class="container hero__grid">

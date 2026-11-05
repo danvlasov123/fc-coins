@@ -36,6 +36,21 @@ const faqs = [
   title={`Buy FC 27 Coins ${platform.label} — Instant Delivery | NINETY`}
   description={`FC 27 coins for ${platform.full} from ${usd(cheapest)} per 100K. Compare packs, check delivery times, buy from a verified partner.`}
 >
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      })}
+    ></script>
+  </Fragment>
+
   <section class="page-hero">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">

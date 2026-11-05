@@ -22,6 +22,21 @@ const faqs = [
   title="FC 26 Coins — Legacy Packs and Prices | NINETY"
   description="FC 26 coins are still tradeable but stock is thinner. What is available, how delivery works, and why FC 27 packs are the better buy now."
 >
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      })}
+    ></script>
+  </Fragment>
+
   <section class="page-hero">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">

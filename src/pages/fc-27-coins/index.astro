@@ -31,6 +31,21 @@ const faqs = [
   title="FC 27 Coins — Buy Cheap EA FC 27 Coins (PS5, Xbox, PC) | NINETY"
   description="FC 27 coins from $6.49 per 100K. Compare packs for PS5, Xbox and PC, check delivery times, and buy from a verified partner store."
 >
+  <Fragment slot="head">
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: { "@type": "Answer", text: faq.a },
+        })),
+      })}
+    ></script>
+  </Fragment>
+
   <section class="page-hero">
     <div class="container">
       <nav class="breadcrumbs" aria-label="Breadcrumb">
@@ -40,8 +55,9 @@ const faqs = [
       </nav>
       <h1>FC 27 coins</h1>
       <p class="lede">
-        Twenty packs, four platforms, one honest price per 100K. Pick the size that fits
-        your budget and the partner handles the rest.
+        Buy FC 27 coins for PS5, Xbox or PC — twenty packs, four platforms, one honest
+        price per 100K. EA FC 27 stock is delivered through the transfer market, and every
+        order is fulfilled by a verified partner.
       </p>
 
       <div class="hero__meta" style="max-width:640px">
